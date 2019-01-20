@@ -88,6 +88,8 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
     /// method `messageForItem(at:indexPath:messagesCollectionView)`.
     func didTapAccessoryView(in cell: MessageCollectionViewCell)
 
+    //Triggered when the user long presses the message
+    func didLongPress(in cell: MessageCollectionViewCell)
 }
 
 public extension MessageCellDelegate {
@@ -103,4 +105,6 @@ public extension MessageCellDelegate {
     func didTapMessageBottomLabel(in cell: MessageCollectionViewCell) {}
     
     func didTapAccessoryView(in cell: MessageCollectionViewCell) {}
+    
+    func didLongPress(in cell: MessageCollectionViewCell) {}
 }

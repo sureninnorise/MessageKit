@@ -87,9 +87,17 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
     /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
     /// method `messageForItem(at:indexPath:messagesCollectionView)`.
     func didTapAccessoryView(in cell: MessageCollectionViewCell)
-
-    //Triggered when the user long presses the message
+    
+    ///Triggered whe a long tap occurs in the accessoryView
+    ///
+    /// -Parameters:
+    ///
+    /// You can get a reference to the `MessageType` for the cell by using `UICollectionView`'s
+    /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
+    /// method `messageForItem(at:indexPath:messagesCollectionView)`.
     func didLongPress(in cell: MessageCollectionViewCell)
+    
+    func didTapOutsideOfContentView()
 }
 
 public extension MessageCellDelegate {
@@ -107,4 +115,6 @@ public extension MessageCellDelegate {
     func didTapAccessoryView(in cell: MessageCollectionViewCell) {}
     
     func didLongPress(in cell: MessageCollectionViewCell) {}
+    
+    func didTapOutsideOfContentView() {}
 }

@@ -73,6 +73,10 @@ open class MessagesCollectionView: UICollectionView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         tapGesture.delaysTouchesBegan = true
         addGestureRecognizer(tapGesture)
+        
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongTap(_:)))
+        longTapGesture.minimumPressDuration = 0.3
+        addGestureRecognizer(longTapGesture)
     }
     
     @objc
@@ -84,6 +88,14 @@ open class MessagesCollectionView: UICollectionView {
         
         let cell = cellForItem(at: indexPath) as? MessageContentCell
         cell?.handleTapGesture(gesture)
+    }
+    
+    @objc open func handleLongTap(_ gesture: UILongPressGestureRecognizer) {
+        let touchLocation = gesture.location(in: self)
+        guard let indexPath = indexPathForItem(at: touchLocation) else { return }
+        
+        let cell = cellForItem(at: indexPath) as? MessageContentCell
+        cell?.handleLongTapGesture(gesture)
     }
 
     public func scrollToBottom(animated: Bool = false) {

@@ -164,14 +164,11 @@ open class MessageContentCell: MessageCollectionViewCell {
             break
         }
     }
-
-    /// Handle long press gesture, return true when gestureRecognizer's touch point in `messageContainerView`'s frame
-    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let touchPoint = gestureRecognizer.location(in: self)
-        if gestureRecognizer is UILongPressGestureRecognizer, messageContainerView.frame.contains(touchPoint) {
+    
+    open func handleLongTapGesture(_ longTap: UIGestureRecognizer) {
+        if messageContainerView.frame.contains(longTap.location(in: self)) {
             self.delegate?.didLongPress(in: self)
         }
-        return false
     }
 
     /// Handle `ContentView`'s tap gesture, return false when `ContentView` doesn't needs to handle gesture
@@ -284,8 +281,7 @@ open class MessageContentCell: MessageCollectionViewCell {
     open func layoutAccessoryView(with attributes: MessagesCollectionViewLayoutAttributes) {
         
         // Accessory view aligned to the middle of the messageContainerView
-        //let y = messageContainerView.frame.midY - (attributes.accessoryViewSize.height / 2)
-        let y = messageContainerView.frame.maxY - attributes.accessoryViewSize.height
+        let y = messageContainerView.frame.midY - (attributes.accessoryViewSize.height / 2)
 
         var origin = CGPoint(x: 0, y: y)
 
